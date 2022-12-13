@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "810316875234",
+    "project_id": "fir-eticaret-project",
+    "storage_bucket": "fir-eticaret-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810316875234:android:5287204608b0692a7b25bb",
+        "android_client_info": {
+          "package_name": "com.example.eticaret_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810316875234-eq07v42dnmnumpr1h1iojoi7c6p42cc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZVt6dx6uVP0RXfWDLcIUR22e4G-URfZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810316875234-eq07v42dnmnumpr1h1iojoi7c6p42cc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
