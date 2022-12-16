@@ -3,6 +3,7 @@ import 'package:eticaret_project/pages/adminPages/admin_home.dart';
 import 'package:eticaret_project/pages/splashPages/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../main.dart';
 
 class AdminUserPages extends StatefulWidget {
@@ -63,7 +64,7 @@ class _AdminUserPagesState extends State<AdminUserPages> {
               icon: Icon(Icons.arrow_back),
             );
           }),
-          title: Text('ADMIN PAGE'),
+          title: Text('adminPanel'.tr),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -74,7 +75,7 @@ class _AdminUserPagesState extends State<AdminUserPages> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'ADMIN LOGIN',
+                      'adminLogin'.tr,
                       style: TextStyle(color: Colors.deepPurple, fontSize: 32),
                     ),
                     const SizedBox(height: 15),
@@ -85,7 +86,7 @@ class _AdminUserPagesState extends State<AdminUserPages> {
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.email),
                         border: OutlineInputBorder(),
-                        labelText: 'E posta',
+                        labelText: 'eposta'.tr,
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -100,7 +101,7 @@ class _AdminUserPagesState extends State<AdminUserPages> {
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.key),
                               border: OutlineInputBorder(),
-                              labelText: 'Password',
+                              labelText: 'password'.tr,
                             ),
                           ),
                         ),
@@ -119,7 +120,7 @@ class _AdminUserPagesState extends State<AdminUserPages> {
                     SizedBox(height: 15),
                     ElevatedButton(
                       child: Text(
-                        'ENTER',
+                        'enter'.tr,
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {

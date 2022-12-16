@@ -1,9 +1,11 @@
+import 'package:eticaret_project/ceviri.dart';
 import 'package:eticaret_project/pages/adminPages/admin_home.dart';
 import 'package:eticaret_project/pages/splashPages/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
+import 'package:get/get.dart';
 
 void main() async {
   //firebase bağlantısı için main kısmı bu şekilde olmalı
@@ -43,12 +45,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      translations: Messages(), // your translations
+      locale: Get.deviceLocale,
+      fallbackLocale: Locale('en', 'UK'),
+
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: const AdminHomePage(),
+      home: const SplashScreenWidget(),
     );
   }
 }

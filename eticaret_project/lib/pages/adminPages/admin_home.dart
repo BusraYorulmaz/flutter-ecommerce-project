@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eticaret_project/pages/adminPages/admin_login.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({Key? key}) : super(key: key);
@@ -65,7 +66,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     return Scaffold(
       drawer: NavigationDrawer(), //navbar yandan açılır menu
       appBar: AppBar(
-        title: const Text("Admin Panel"),
+        title: Text("adminPanel".tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -75,7 +76,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: urunName,
-                decoration: const InputDecoration(hintText: "Urun Name"),
+                decoration: InputDecoration(hintText: "urunName".tr),
               ),
             ),
             // Padding(
@@ -86,22 +87,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
             //   ),
             // ),stream: _firestore.collection('urun').doc('kategori').snapshots(),
 
-     
-   
-
-
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: bodySize,
-                decoration: const InputDecoration(hintText: "Urun body size"),
+                decoration: InputDecoration(hintText: "bodySize".tr),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: shoeSize,
-                decoration: const InputDecoration(hintText: "Urun shoe size"),
+                decoration: InputDecoration(hintText: "shoeSize".tr),
               ),
             ),
             Padding(
@@ -114,7 +111,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       ekleAdd(urunName.text, urunKategori.text, bodySize.text,
                           shoeSize.text);
                     },
-                    child: Text("Create"),
+                    child: Text("create".tr),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       onPrimary: Colors.white,
@@ -127,7 +124,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       guncelleme(urunName.text, urunKategori.text,
                           bodySize.text, shoeSize.text);
                     },
-                    child: Text("Update"),
+                    child: Text("update".tr),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.orange,
                       onPrimary: Colors.white,
@@ -140,7 +137,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       veriSil(urunName.text, urunKategori.text, bodySize.text,
                           shoeSize.text);
                     },
-                    child: Text("Delete"),
+                    child: Text("delete".tr),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
                       onPrimary: Colors.white,
@@ -156,8 +153,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
               child: Container(
                   child: Column(
                 children: [
-                  const Text('VERİLER', style: TextStyle(fontSize: 24)),
-                  //veriler stream ile anlık olarak izlenerek ekrana yazdırılıyor
+                  Text('veriler'.tr, style: TextStyle(fontSize: 24)),
+                  //veriler stream ile anlık olarak izlenerek ekrana yansıtılıyor.
                   StreamBuilder<QuerySnapshot<Object?>>(
                       stream: _firestore.collection('urun').snapshots(),
                       builder: (BuildContext context,
@@ -174,7 +171,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           children: snapshot.data!.docs.map((document) {
                             return Card(
                               child: ListTile(
-                                title: Text("İsim: " + document['isim'],
+                                title: Text("urunName".tr + document['isim'],
                                     style: const TextStyle(fontSize: 16)),
                                 subtitle: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -182,15 +179,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Kategori: " + document['kategori'],
+                                      "kategori".tr + document['kategori'],
                                       style: const TextStyle(fontSize: 13),
                                     ),
                                     Text(
-                                      " Body: " + document['body'],
+                                      "bodySize".tr + document['body'],
                                       style: const TextStyle(fontSize: 13),
                                     ),
                                     Text(
-                                      " Shoe: " + document['shoe'],
+                                      "shoeSize".tr + document['shoe'],
                                       style: const TextStyle(fontSize: 13),
                                     ),
                                   ],
@@ -204,7 +201,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: const Text('Kategoriler',
+                    child: Text('kategori'.tr,
                         style: TextStyle(fontSize: 24)),
                   ),
 
@@ -225,37 +222,37 @@ class _AdminHomePageState extends State<AdminHomePage> {
   createPopup() => showDialog(
       context: context,
       builder: ((context) => SimpleDialog(
-            title: const Text('Ürün Eklendi', textAlign: TextAlign.center),
+            title:  Text('product_added'.tr, textAlign: TextAlign.center),
             children: <Widget>[
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('OKEY')),
+                  child:  Text('okey'.tr)),
             ],
           )));
   guncellePopup() => showDialog(
       context: context,
       builder: ((context) => SimpleDialog(
-            title: const Text('Ürün Güncellendi', textAlign: TextAlign.center),
+            title: Text('product_updated'.tr, textAlign: TextAlign.center),
             children: <Widget>[
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('OKEY')),
+                  child:  Text('okey'.tr)),
             ],
           )));
   silPopup() => showDialog(
       context: context,
       builder: ((context) => SimpleDialog(
-            title: const Text('Ürün Silindi', textAlign: TextAlign.center),
+            title: Text('product_deleted'.tr, textAlign: TextAlign.center),
             children: <Widget>[
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('OKEY')),
+                  child:  Text('okey'.tr)),
             ],
           )));
 }
@@ -313,7 +310,7 @@ class NavigationDrawer extends StatelessWidget {
           children: [
             ListTile(
               leading: Icon(Icons.home_outlined),
-              title: Text('home'),
+              title: Text('home'.tr),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const AdminHomePage(),
@@ -325,17 +322,13 @@ class NavigationDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.admin_panel_settings_outlined),
-              title: Text('Admin'),
+              title: Text('admin'.tr),
               onTap: () {},
             ),
-            ListTile(
-              leading: Icon(Icons.workspaces_outlined),
-              title: Text('Workflow'),
-              onTap: () {},
-            ),
+             
             ListTile(
               leading: Icon(Icons.arrow_back_sharp),
-              title: Text('Exit'),
+              title: Text('exit'.tr),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const AdminUserPages(),

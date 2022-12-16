@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:eticaret_project/constants/constant.dart';
 import 'package:eticaret_project/pages/userPages/userLoginRegister.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../adminPages/admin_login.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -16,37 +17,53 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
-        children: [
-          _backgroundImageAssets(size),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 40),
-                    _skipButton(TextConstants().skipButtonText, context),
-                    const SizedBox(height: 40),
-                    _splashTitleText(),
-                    const SizedBox(height: 10),
-                    _splashSubTitleText(size),
-                  ],
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            _backgroundImageAssets(size),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FloatingActionButton(
+                            child: Icon(Icons.language),
+                            onPressed: () {
+                              Get.updateLocale(
+                                Get.locale == Locale('tr', 'TR')
+                                    ? Locale('en', 'US')
+                                    : Locale('tr', 'TR'),
+                              );
+                            },
+                          ),
+                          _skipButton(TextConstants().skipButtonText, context),
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                      _splashTitleText(),
+                      const SizedBox(height: 10),
+                      _splashSubTitleText(size),
+                    ],
+                  ),
                 ),
-              ),
-              _bottomContainer(size, context)
-            ],
-          ),
-        ],
+                _bottomContainer(size, context)
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Text _splashTitleText() {
     return Text(
-      TextConstants().splashTitleText,
+      'title'.tr,
       style: const TextStyle(color: Colors.deepPurpleAccent, fontSize: 60),
     );
   }
@@ -95,7 +112,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
             MaterialPageRoute(builder: (_) => const WidgetUserAndRegister()),
             (route) => false);
       },
-      child: const Card(
+      child: Card(
         elevation: 50,
         color: Colors.white,
         child: SizedBox(
@@ -103,7 +120,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
           width: 250,
           child: Center(
             child: Text(
-              TextConstants.userlogin,
+              'user_login'.tr,
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
           ),
@@ -120,7 +137,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
             MaterialPageRoute(builder: (_) => const AdminUserPages()),
             (route) => false);
       },
-      child: const Card(
+      child: Card(
         elevation: 50,
         color: Colors.white,
         child: SizedBox(
@@ -128,7 +145,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
           width: 250,
           child: Center(
             child: Text(
-              TextConstants.adminlogin,
+              'admin_login'.tr,
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
           ),
@@ -151,7 +168,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
-            text,
+            'skip'.tr,
             style: TextStyle(color: Colors.black, fontSize: 18),
           ),
         ),
@@ -162,18 +179,18 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
   openInformationPopup() => showDialog(
         context: context,
         builder: ((context) => SimpleDialog(
-              title: const Text(
-                'YOUR INFORMATION',
+              title: Text(
+                'your_informaiton'.tr,
                 textAlign: TextAlign.center,
               ),
               children: <Widget>[
-                const TextField(
+                TextField(
                   decoration: InputDecoration(
-                      hintText: 'Body Size', icon: Icon(Icons.boy_rounded)),
+                      hintText: 'bodySize'.tr, icon: Icon(Icons.boy_rounded)),
                 ),
-                const TextField(
+                TextField(
                   decoration: InputDecoration(
-                      hintText: 'Shoe Size', icon: Icon(Icons.snowshoeing)),
+                      hintText: 'shoeSize'.tr, icon: Icon(Icons.snowshoeing)),
                 ),
                 TextButton(
                     onPressed: () {
@@ -183,7 +200,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
                       //     MaterialPageRoute(builder: (_) =>   SplashScreenWidget()),
                       //     (route) => false);
                     },
-                    child: Text('OKEY')),
+                    child: Text('okey'.tr)),
               ],
             )),
       );
@@ -191,8 +208,8 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
   _splashSubTitleText(Size size) {
     return Container(
       constraints: BoxConstraints(maxWidth: size.width * 0.9),
-      child: const Text(
-        TextConstants.splashSubtitleText,
+      child: Text(
+        'explanation'.tr,
         style: TextStyle(color: Colors.black, fontSize: 26),
       ),
     );

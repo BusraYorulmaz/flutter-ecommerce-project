@@ -4,8 +4,8 @@ class AssetPathConstant {
 }
 
 class TextConstants {
-  final String skipButtonText = 'Skip';
-  final String splashTitleText= "HAPPY SHOP"; 
+final String skipButtonText = 'Skip';
+ // final String splashTitleText= "HAPPY SHOP"; 
   static const String userlogin="User Login";
   static const String adminlogin="Admin  Login";
   static const String withoutlogin="Continue Without Login";

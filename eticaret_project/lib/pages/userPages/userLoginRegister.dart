@@ -1,10 +1,11 @@
-import'package:eticaret_project/main.dart';
+import 'package:eticaret_project/main.dart';
 import 'package:eticaret_project/pages/splashPages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
-//user page ve register page in olduğu ana sayfa 
+//user page ve register page in olduğu ana sayfa
 class WidgetUserAndRegister extends StatefulWidget {
   const WidgetUserAndRegister({Key? key}) : super(key: key);
 
@@ -39,23 +40,23 @@ class _WidgetUserAndRegisterState extends State<WidgetUserAndRegister> {
                   }),
 
                   //kaydırılabilir appbar
-                  title: const Text('USER PAGE'),
+                  title: Text('userPage'.tr),
                   expandedHeight: 50,
                   pinned: true,
                 ),
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: TabBar(
                     labelColor: Colors.pink,
                     unselectedLabelColor: Colors.black,
                     indicatorColor: Colors.pink,
                     tabs: [
                       Tab(
-                        icon: Icon(Icons.account_circle_rounded),
-                        text: 'Login',
+                        icon: const Icon(Icons.account_circle_rounded),
+                        text: 'login'.tr,
                       ),
                       Tab(
-                        icon: Icon(Icons.add_box_sharp),
-                        text: 'Register',
+                        icon: const Icon(Icons.add_box_sharp),
+                        text: 'register'.tr,
                       ),
                     ],
                   ),
@@ -71,8 +72,7 @@ class _WidgetUserAndRegisterState extends State<WidgetUserAndRegister> {
   }
 }
 
-
-//Kullanıcı girişi 
+//Kullanıcı girişi
 class UserLoginPage extends StatefulWidget {
   const UserLoginPage({Key? key}) : super(key: key);
 
@@ -119,19 +119,20 @@ class _UserLoginPageState extends State<UserLoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'USER LOGIN',
-                      style: TextStyle(color: Colors.deepPurple, fontSize: 32),
+                    Text(
+                      'kullaniciGirisi'.tr,
+                      style: const TextStyle(
+                          color: Colors.deepPurple, fontSize: 32),
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
                       controller: _emailController, //email kontrolü
                       cursorColor: Colors.pink,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
-                        labelText: 'E posta',
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.email),
+                        border: const OutlineInputBorder(),
+                        labelText: 'eposta'.tr,
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -142,29 +143,31 @@ class _UserLoginPageState extends State<UserLoginPage> {
                             obscureText: sifre_gozukme, //şifeyi gizli tutma
                             controller: _passwordController, //şifre kontrolü
                             cursorColor: Colors.pink,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.key),
-                              border: OutlineInputBorder(),
-                              
-                              labelText: 'Password',
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.key),
+                              border: const OutlineInputBorder(),
+                              labelText: 'password'.tr,
                             ),
-                            
                           ),
                         ),
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              sifre_gozukme =!sifre_gozukme;
+                              sifre_gozukme = !sifre_gozukme;
                             });
                           },
-                          icon: Icon(
-                            sifre_gozukme?Icons.remove_red_eye : Icons.close),
+                          icon: Icon(sifre_gozukme
+                              ? Icons.remove_red_eye
+                              : Icons.close),
                         ),
                       ],
                     ),
                     const SizedBox(height: 15),
                     ElevatedButton(
-                      child: const Text('ENTER',style: TextStyle(fontSize: 16),),
+                      child:   Text(
+                        'enter'.tr,
+                        style: TextStyle(fontSize: 16),
+                      ),
                       onPressed: () {
                         signIn(_emailController.text, _passwordController.text)
                             .then((value) {});
@@ -183,18 +186,18 @@ class _UserLoginPageState extends State<UserLoginPage> {
   openInformationPopup() => showDialog(
         context: context,
         builder: ((context) => SimpleDialog(
-              title: const Text(
-                'YOUR INFORMATION',
+              title: Text(
+                'your_informaiton'.tr,
                 textAlign: TextAlign.center,
               ),
               children: <Widget>[
-                const TextField(
+                  TextField(
                   decoration: InputDecoration(
-                      hintText: 'Body Size', icon: Icon(Icons.boy_rounded)),
+                      hintText: 'bodySize'.tr, icon: Icon(Icons.boy_rounded)),
                 ),
-                const TextField(
+                  TextField(
                   decoration: InputDecoration(
-                      hintText: 'Shoe Size', icon: Icon(Icons.snowshoeing)),
+                      hintText: 'shoeSize'.tr, icon: Icon(Icons.snowshoeing)),
                 ),
                 TextButton(
                     onPressed: () {
@@ -203,14 +206,13 @@ class _UserLoginPageState extends State<UserLoginPage> {
                           MaterialPageRoute(builder: (_) => const LogAutUser()),
                           (route) => false);
                     },
-                    child: Text('OKEY')),
+                    child: Text('okey'.tr)),
               ],
             )),
       );
 }
 
-
-//kullacı kayıt regiter 
+//kullacı kayıt regiter
 class RegisterUserPage extends StatefulWidget {
   const RegisterUserPage({Key? key}) : super(key: key);
 
@@ -240,7 +242,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'REGISTER ',
+                      'register'.tr,
                       style: TextStyle(color: Colors.deepPurple, fontSize: 32),
                     ),
                     const SizedBox(height: 15),
@@ -251,7 +253,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.email),
                         border: OutlineInputBorder(),
-                        labelText: 'E posta',
+                        labelText: 'eposta'.tr,
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -265,18 +267,19 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.key),
                               border: OutlineInputBorder(),
-                              labelText: 'Password',
+                              labelText: 'password'.tr,
                             ),
                           ),
                         ),
-                         IconButton(
+                        IconButton(
                           onPressed: () {
                             setState(() {
-                              sifre_gozukme =!sifre_gozukme;
+                              sifre_gozukme = !sifre_gozukme;
                             });
                           },
-                          icon: Icon(
-                            sifre_gozukme?Icons.remove_red_eye : Icons.close),
+                          icon: Icon(sifre_gozukme
+                              ? Icons.remove_red_eye
+                              : Icons.close),
                         ),
                       ],
                     ),
@@ -287,7 +290,10 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                                 _emailController.text, _passwordController.text)
                             .then((value) {});
                       },
-                      child: Text('SIGN IN',style: TextStyle(fontSize: 16),),
+                      child: Text(
+                        'sıgnIn'.tr,
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),
@@ -300,7 +306,6 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   }
 
   Future<User?> userRegister(String email, String password) async {
- 
     try {
       var _userCredential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -351,7 +356,6 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
       );
 }
 
-
 //OTURUM SONLANDIRMA
 class LogAutUser extends StatefulWidget {
   const LogAutUser({Key? key}) : super(key: key);
@@ -389,9 +393,8 @@ class _LogAutUserState extends State<LogAutUser> {
       ),
     );
   }
+
   void signOutUser() async {
     await _auth.signOut();
   }
 }
-
-
