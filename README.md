@@ -1,7 +1,6 @@
 # flutter-eticaret-project
-- It is an e-commerce project that I continue to develop.
-- This application is an e-commerce mobile application.
-- Multi-language feature has been added to the application. It contains English and Turkish languages.
+- It is an e-commerce mobile application project that I continue to develop.
+- Multi-language feature has been added to the application. It includes English and Turkish languages.
 <br/><br/>
  
 
