@@ -11,7 +11,9 @@
 <img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen05.jpeg"  width="250" height="400" />
 <img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen06.jpeg"  width="250" height="400" />   
 <img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen07.jpeg"  width="250" height="400" />
+<img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen12.jpeg" width="250" height="400" />
 <img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen08.jpeg"  width="250" height="400" />
+
 <img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen09.jpeg"  width="250" height="400" />  
 <img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen10.jpeg" width="250" height="400"/>
 <img align="left" src="https://github.com/BusraYorulmaz/flutter-eticaret-project/blob/main/screenShots/screen11.jpeg"  width="250" height="400" />
