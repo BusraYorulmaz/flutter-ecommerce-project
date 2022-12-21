@@ -11,8 +11,8 @@ class Messages extends Translations {
           "admin_login": "Admin  Login",
           "continue_without_login": "Continue Without Login",
           "your_informaiton": "YOUR INFORMATION",
-          "bodySize": "body Size",
-          "shoeSize": "shoe Size",
+          "bodySize": "Body Size",
+          "shoeSize": "Shoe Size",
           "okey": "OKEY",
           "userPage": "USER PAGE",
           "adminPage": "ADMIN PAGE",
@@ -25,17 +25,23 @@ class Messages extends Translations {
           "sıgnIn": "SIGIN IN",
           "adminLogin": "ADMIN LOGIN",
           "adminPanel": "ADMIN PANEL",
-          "urunName": "Product Name",
+          "urunName": "Product Name: ",
           "create": "CREATE",
           "update": "UPDATE",
           "delete": "DELETE",
-          "product_added":"Product added",
-          "product_updated":"Product updated",
-          "product_deleted":"Product deleted",
-          "kategori": "categori",
+          "product_added":"Product Added",
+          "product_updated":"Product Updated",
+          "product_deleted":"Product Deleted",
+          "kategori": "Categori: ",
           "home ": "Home",
           "admin": "Admin",
-          "exit": "Exit"
+          "exit": "Exit",
+          "size":"Size: ",
+          "bodysec":"Clothes",
+          "shoesec":"Shoes"
+          
+    
+
         },
         'tr_TR': {
           "title": "MUTLU ALIŞVERİŞ",
@@ -70,7 +76,11 @@ class Messages extends Translations {
           "kategori": "Kategori: ",
           "home ": "Ana Sayfa",
           "admin": "Yönetici",
-          "exit": "Çıkış"
+          "exit": "Çıkış",
+          "size":"Numara: ",
+          "bodysec":"Kıyafet",
+          "shoesec":"Ayakkabı"
+          
         }
       };
 }

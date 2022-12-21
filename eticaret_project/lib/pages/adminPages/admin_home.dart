@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eticaret_project/pages/adminPages/admin_login.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({Key? key}) : super(key: key);
@@ -19,31 +21,60 @@ class _AdminHomePageState extends State<AdminHomePage> {
   TextEditingController bodySize = TextEditingController();
   TextEditingController shoeSize = TextEditingController();
 
+  final List<String> bodyShoeSize = ['bodysec'.tr, 'shoesec'.tr];
+  final List<String> shoeSized = [
+    '35',
+    '36',
+    '37',
+    '38',
+    '39',
+    '40',
+    '41',
+    '42',
+    '43',
+    '44'
+  ];
+  final List<String> bodySized = [
+    'XSmall',
+    'Small',
+    'Medium',
+    'Large',
+    'XLarge',
+    'XX Large'
+  ];
+
+  String? selectedBodyorShoe;
+  String? selectedSize;
+  List<String> size = [];
+
   @override
   Widget build(BuildContext context) {
     var collection = _firestore.collection('urun');
     Stream<QuerySnapshot> docSnapShot = collection.snapshots();
 
-    ekleAdd(String urunName, String urunKategori, String bodySize,
-        String shoeSize) async {
+    ekleAdd(
+      String urunName,
+      String selectedBodyorShoe,
+      String bodySselectedSizeize,
+    ) async {
       Map<String, dynamic> _eklenecekVeri = <String, dynamic>{};
       _eklenecekVeri['isim'] = urunName;
-      _eklenecekVeri['kategori'] = urunKategori;
-      _eklenecekVeri['body'] = bodySize;
-      _eklenecekVeri['shoe'] = shoeSize;
+      _eklenecekVeri['kategori'] = selectedBodyorShoe;
+      _eklenecekVeri['size1'] = selectedSize;
 
       await _firestore.collection('urun').doc(urunName).set(_eklenecekVeri);
-
       createPopup();
     }
 
-    guncelleme(String urunName, String urunKategori, String bodySize,
-        String shoeSize) async {
+    guncelleme(
+      String urunName,
+      String selectedBodyorShoe,
+      String selectedSize,
+    ) async {
       await _firestore.collection('urun').doc(urunName).update({
         'isim': urunName,
-        'kategori': urunKategori,
-        'body': bodySize,
-        'shoe': shoeSize
+        'kategori': selectedBodyorShoe,
+        'size1': selectedSize
       });
       guncellePopup();
     }
@@ -52,15 +83,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
         String shoeSize) async {
       await _firestore.collection('urun').doc(urunName).delete();
       silPopup();
-    }
-
-    queryingData() async {
-      var _userRef = _firestore.collection('urun');
-      var _sonuc = await _userRef.where('body', whereIn: ['38', '40']).get();
-
-      for (var urun in _sonuc.docs) {
-        debugPrint(urun.data().toString());
-      }
     }
 
     return Scaffold(
@@ -79,26 +101,46 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 decoration: InputDecoration(hintText: "urunName".tr),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(16.0),
-            //   child: TextField(
-            //     controller: urunKategori,
-            //     decoration: const InputDecoration(hintText: "Urun kategori"),
-            //   ),
-            // ),stream: _firestore.collection('urun').doc('kategori').snapshots(),
-
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: bodySize,
-                decoration: InputDecoration(hintText: "bodySize".tr),
+              child: DropdownButton<String>(
+                isExpanded: true,
+                value: selectedBodyorShoe,
+                items: bodyShoeSize.map((e) {
+                  return DropdownMenuItem<String>(
+                    value: e,
+                    child: Text('$e'),
+                  );
+                }).toList(),
+                onChanged: (val) {
+                  selectedSize = null;
+                  size = val == 'bodysec'.tr ? bodySized : shoeSized;
+                  setState(() {
+                    selectedBodyorShoe = val;
+                    print("Seçim: $val");
+                  });
+                },
               ),
             ),
+
+            //province
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: shoeSize,
-                decoration: InputDecoration(hintText: "shoeSize".tr),
+              child: DropdownButton<String>(
+                isExpanded: true,
+                value: selectedSize,
+                items: size.map((e) {
+                  return DropdownMenuItem<String>(
+                    value: e,
+                    child: Text('$e'),
+                  );
+                }).toList(),
+                onChanged: (valSize) {
+                  setState(() {
+                    selectedSize = valSize;
+                    print("Size: $valSize");
+                  });
+                },
               ),
             ),
             Padding(
@@ -108,26 +150,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      ekleAdd(urunName.text, urunKategori.text, bodySize.text,
-                          shoeSize.text);
+                      ekleAdd(urunName.text, selectedBodyorShoe.toString(),
+                          selectedSize.toString());
                     },
                     child: Text("create".tr),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                      onPrimary: Colors.white,
+                      primary: Colors.grey.shade300,
+                      onPrimary: Colors.deepPurple,
                       shadowColor: Colors.deepPurple,
                       elevation: 5,
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      guncelleme(urunName.text, urunKategori.text,
-                          bodySize.text, shoeSize.text);
+                      guncelleme(urunName.text, selectedBodyorShoe.toString(),
+                          selectedSize.toString());
                     },
                     child: Text("update".tr),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.orange,
-                      onPrimary: Colors.white,
+                      primary: Colors.grey.shade300,
+                      onPrimary: Colors.deepPurple,
                       shadowColor: Colors.deepPurple,
                       elevation: 5,
                     ),
@@ -139,8 +181,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     },
                     child: Text("delete".tr),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                      onPrimary: Colors.white,
+                      primary: Colors.grey.shade300,
+                      onPrimary: Colors.deepPurple,
                       shadowColor: Colors.deepPurple,
                       elevation: 5,
                     ),
@@ -182,14 +224,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       "kategori".tr + document['kategori'],
                                       style: const TextStyle(fontSize: 13),
                                     ),
+
+                                    //Text("Size" + document['size'],style: const TextStyle(fontSize: 13),),
+                                    //     Text("Size" + document['size']),
+
                                     Text(
-                                      "bodySize".tr + document['body'],
+                                      "size".tr + document['size1'],
                                       style: const TextStyle(fontSize: 13),
                                     ),
-                                    Text(
-                                      "shoeSize".tr + document['shoe'],
-                                      style: const TextStyle(fontSize: 13),
-                                    ),
+                                    // Text(
+                                    //   "shoeSize".tr + document['shoe'],
+                                    //   style: const TextStyle(fontSize: 13),
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -198,18 +244,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         );
                         // return Text("sd");
                       }),
-
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text('kategori'.tr,
-                        style: TextStyle(fontSize: 24)),
-                  ),
-
-                  ElevatedButton(
-                    onPressed: () => queryingData(),
-                    child: Text("sorgu"),
-                    style: ElevatedButton.styleFrom(primary: Colors.red),
-                  ),
                 ],
               )),
             ),
@@ -222,13 +256,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
   createPopup() => showDialog(
       context: context,
       builder: ((context) => SimpleDialog(
-            title:  Text('product_added'.tr, textAlign: TextAlign.center),
+            title: Text('product_added'.tr, textAlign: TextAlign.center),
             children: <Widget>[
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child:  Text('okey'.tr)),
+                  child: Text('okey'.tr)),
             ],
           )));
   guncellePopup() => showDialog(
@@ -240,7 +274,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child:  Text('okey'.tr)),
+                  child: Text('okey'.tr)),
             ],
           )));
   silPopup() => showDialog(
@@ -252,7 +286,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child:  Text('okey'.tr)),
+                  child: Text('okey'.tr)),
             ],
           )));
 }
@@ -325,7 +359,6 @@ class NavigationDrawer extends StatelessWidget {
               title: Text('admin'.tr),
               onTap: () {},
             ),
-             
             ListTile(
               leading: Icon(Icons.arrow_back_sharp),
               title: Text('exit'.tr),
