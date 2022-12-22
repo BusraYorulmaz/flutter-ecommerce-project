@@ -1,6 +1,7 @@
 # flutter-eticaret-project
 - It is an e-commerce mobile application project that I continue to develop.
 - Multi-language feature has been added to the application. It includes English and Turkish languages.
+- Firebase database is used in the application.
 <br/><br/>
  
 
